@@ -1,0 +1,18 @@
+[
+    {
+        "id": "sublime2note",
+        "caption": "Save to Evernote",
+        "command": "save_to_evernote"
+    },
+    {
+        "caption": "Reset Evernote Authentication",
+        "command": "reset_evernote_authentication"
+    },
+    {
+        "caption": "Save to Evernote Settings",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/User/Sublime2Note.sublime-settings"
+        }
+    }
+]

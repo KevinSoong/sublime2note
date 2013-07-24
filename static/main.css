@@ -1,0 +1,45 @@
+    .container { margin: 70px auto; text-align: center; width: 400px; }
+    .logo { margin: 30px auto 10px auto; width:150px; height: 160px; position: relative; }
+    .logo>div { position: absolute; }
+    .text { font-family: "Acme", sans-serif; font-size: 13px; color: #747778; }
+    .subtitle>a { color: #6bb130; text-decoration: none;}
+    .title { font-size: 48px; color:#555555;}
+    /* CSS Animations */
+    .logo .black {
+        -webkit-animation: wipe 1s 1;
+        -webkit-animation-delay: 0.6s;
+        -webkit-animation-direction: alternative;
+        -webkit-animation-fill-mode: forwards;
+        -webkit-mask-size: 600px 600px;
+        -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, 
+                color-stop(0.00,  rgba(0,0,0,1)),
+                color-stop(0.45,  rgba(0,0,0,1)),
+                color-stop(0.50,  rgba(0,0,0,0)),
+                color-stop(0.55,  rgba(0,0,0,0)),
+                color-stop(1.00,  rgba(0,0,0,0)));
+    }
+    .container {
+        -webkit-animation: zoom 0.8s 1;
+        -webkit-animation-fill-mode: forwards;
+    }
+    @-webkit-keyframes wipe {
+            0% {
+                -webkit-mask-position: 0 0; /* Implied normally, but needed for animation */
+            }
+            100% {
+                -webkit-mask-position: -300px -300px;
+            }
+    }
+    @-webkit-keyframes zoom {
+            0% {
+                -webkit-transform: scale(0.7);
+                opacity: 0.6;
+            }
+            70% {
+                -webkit-transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1);
+            }
+    }
