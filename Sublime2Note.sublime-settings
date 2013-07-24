@@ -1,0 +1,9 @@
+{
+    // Settings will be overwrite after plugin update.
+    // Modifications are better saved in the user version.
+
+    /* Workflow */
+
+    "always_use_filename_as_title": false,
+    "always_prompt_for_tags": true,
+}
