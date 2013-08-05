@@ -6,8 +6,9 @@ import pickle
 # Force Python to notice local-embedded Evernote API libs
 #
 sys.path.append('./lib')
-CURRENT_PATH = os.path.abspath('./').replace(' ', '\\ ')
-ACCESS_TOKEN_PATH = '.sublime2note-token'
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+ACCESS_TOKEN_PATH = os.path.join(CURRENT_PATH, '.sublime2note-token')
+SERVER_TOOL_PATH = os.path.join(CURRENT_PATH, 'sublime2note-tool.py')
 
 from thrift.transport.THttpClient import THttpClient
 from evernote.edam.type.ttypes import Note as EvernoteTypeNote
@@ -73,7 +74,7 @@ class SaveToEvernoteCommand(sublime_plugin.TextCommand):
             noteStore = client.get_note_store()
         except EDAMUserException, e:
             sublime.status_message('Authentication failed: Reconnect to Evernote... %s' % e)
-            proc = subprocess.Popen('python %s start' % os.path.join(CURRENT_PATH, 'sublime2note-tool.py'), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+            proc = subprocess.Popen('python %s start' % SERVER_TOOL_PATH.replace(' ','\ '), stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             for ln in proc.stderr:
                 print ln
             return False
@@ -84,11 +85,16 @@ class SaveToEvernoteCommand(sublime_plugin.TextCommand):
             return noteStore
     def load_token(self):
         if os.path.isfile(ACCESS_TOKEN_PATH):
-            with open(ACCESS_TOKEN_PATH) as f:
-                return pickle.load(f)
+            try:
+                with open(ACCESS_TOKEN_PATH) as f:
+                    return pickle.load(f)
+            except Exception, e:
+                pass
         return ''
     def run(self, edit):
-        client = EvernoteClient(token=self.load_token())
+        token = self.load_token()
+        print token
+        client = EvernoteClient(token=token)
         self.noteStore = self.connect(client)
         if self.noteStore:
             self.process_note()

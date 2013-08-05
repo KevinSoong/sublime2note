@@ -1,6 +1,10 @@
+#! /usr/bin/env python
+
 import sys
+import os
 import pickle
-ACCESS_TOKEN_PATH = '.sublime2note-token'
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+ACCESS_TOKEN_PATH = os.path.join(CURRENT_PATH,'.sublime2note-token')
 
 sys.path.append("./lib")
 
@@ -25,9 +29,9 @@ from evernote.api.client import EvernoteClient
 
 app = Flask(__name__)
 client = EvernoteClient(
-    consumer_key='kjsery',
-    consumer_secret='e819b5887b9342c7',
-    sandbox=True
+    consumer_key='sublime2note',
+    consumer_secret='8e59d5af450233cf',
+    sandbox=False
 )
 
 request_token = client.get_request_token('http://127.0.0.1:%d/token' % args.port_number)

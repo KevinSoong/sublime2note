@@ -7,7 +7,8 @@ import signal
 import traceback
 import webbrowser
 
-CONFIG_PATH = '.sublime2note-server'
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+CONFIG_PATH = os.path.join(CURRENT_PATH,'.sublime2note-server')
 config = None
 server_port = 5000
 server_pid = -1
